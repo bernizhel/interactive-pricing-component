@@ -110,6 +110,10 @@ module.exports = {
                 test: /\.svg$/,
                 use: ['inline-svg-loader'],
             },
+            {
+                test: /\.([ot]tf|woff2?)$/,
+                use: ['file-loader'],
+            },
         ],
     },
 };

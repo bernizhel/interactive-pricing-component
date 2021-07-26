@@ -1,28 +1,100 @@
 @import '~normalize.css';
-// Manrope font-family
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&display=swap');
-@import '@s/media';
 
 $background-source: '@i/bg-pattern.svg';
-$component-background-color: hsl (0, 0%, 100%);
-$main-background-color: hsl(230, 100%, 99%);
-$toggle-background-color: hsl(223, 50%, 87%);
-
+$header-background-source: '@i/pattern-circles.svg';
+$introductory-paragraph-size: 15px;
+$bold-weight: 800;
+$regular-weight: 600;
 $text-color: hsl(225, 20%, 60%);
 $CTA-text-color: hsl(226, 100%, 87%);
 $text-and-CTA-background-color: hsl(227, 35%, 25%);
-$introductory-paragraph-size: 15px;
-
+$main-background-color: hsl(230, 100%, 99%);
+$component-background-color: hsl (0, 0%, 100%);
+$toggle-background-color: hsl(223, 50%, 87%);
 $full-slider-bar-color: hsl(174, 77%, 80%);
 $empty-slider-bar-color: hsl(224, 65%, 95%);
 $slider-background-color: hsl(174, 86%, 45%);
-
 $discount-background-color: hsl(14, 92%, 95%);
 $discount-text-color: hsl(15, 100%, 70%);
+$ugly-width: 1440px;
+$mobile-width: 375px;
+
+$body-bg-width: 100vw;
+$body-bg-height: 59vh;
+$bg-trick-string: 'trick';
+@mixin bg-image($url, $position: center, $size: contain, $size-trick: 100%, $repeat: no-repeat) {
+  background-image: url($url);
+  background-position: $position;
+  @if $size == $bg-trick-string {
+    padding: $size-trick * 1rem;
+    margin: $size-trick * (-1rem);
+    background-size: $size-trick * 1rem * 2;
+  } @else {
+    background-size: $size;
+  }
+  background-repeat: $repeat;
+}
+
+@mixin text-font($size: 1rem, $color: #000, $weight: $regular-weight, $height: 1em, $spacing: 1px) {
+  font: {
+    size: $size;
+    weight: $weight;
+  }
+  line-height: $height;
+  letter-spacing: $spacing;
+  color: $color;
+}
+
+@mixin mq($width, $value-map) {
+  @media screen and (max-width: $width) {
+    @each $property, $value in $value-map {
+      #{$property}: $value;
+    }
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   background-color: $main-background-color;
-  background-image: url($background-source);
+  @include bg-image($background-source, left top, $body-bg-width $body-bg-height);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  transition: background-size .1s ease-out;
 }
 
+@for $i from 0 through 3 {
+  body {
+    @include mq($ugly-width - $i * 300px, (background-size: ($body-bg-width + $i * 50) ($body-bg-height - $i * 3)));
+  }
+}
 
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100vh;
+}
+
+.header {
+  text-align: center;
+  @include bg-image($header-background-source, $position: center 75%, $size: $bg-trick-string, $size-trick: 6);
+  &__head {
+    margin: 0 {
+      bottom: 15px;
+    }
+    @include text-font(2rem, $weight: $bold-weight, $spacing: 0.5px);
+  }
+  &__text {
+    @include text-font($introductory-paragraph-size, $text-color);
+  }
+}
