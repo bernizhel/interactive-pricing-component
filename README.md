@@ -26,25 +26,28 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![Not done yet](./screenshot.jpg)
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Add solution URL here]()
+- Live Site URL: [Add live site URL here]()
 
 ## My process
 
 ### Built with
 
-- Vanilla JavaScript.
 - Semantic HTML5 markup.
 - CSS custom properties, flexbox, grid.
+- Desktop-first workflow.
 - Sass preprocessor and BEM methodology.
-- Webpack bundle and PostCSS.
-- Mobile-first workflow.
+- Webpack bundle and PostCSS plugins.
+- Vanilla JavaScript.
 
 ### What I learned
+
+1. _SASS_ preprocessor more closely.
+2. How to style `input` tag of range type.
 
 ### Useful resources
 

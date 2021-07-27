@@ -1,58 +1,8 @@
 @import '~normalize.css';
+@import '@s/vars';
+@import '@s/mixins';
 
-$background-source: '@i/bg-pattern.svg';
-$header-background-source: '@i/pattern-circles.svg';
-$introductory-paragraph-size: 15px;
-$bold-weight: 800;
-$regular-weight: 600;
-$text-color: hsl(225, 20%, 60%);
-$CTA-text-color: hsl(226, 100%, 87%);
-$text-and-CTA-background-color: hsl(227, 35%, 25%);
-$main-background-color: hsl(230, 100%, 99%);
-$component-background-color: hsl (0, 0%, 100%);
-$toggle-background-color: hsl(223, 50%, 87%);
-$full-slider-bar-color: hsl(174, 77%, 80%);
-$empty-slider-bar-color: hsl(224, 65%, 95%);
-$slider-background-color: hsl(174, 86%, 45%);
-$discount-background-color: hsl(14, 92%, 95%);
-$discount-text-color: hsl(15, 100%, 70%);
-$ugly-width: 1440px;
-$mobile-width: 375px;
-
-$body-bg-width: 100vw;
-$body-bg-height: 59vh;
-$bg-trick-string: 'trick';
-@mixin bg-image($url, $position: center, $size: contain, $size-trick: 100%, $repeat: no-repeat) {
-  background-image: url($url);
-  background-position: $position;
-  @if $size == $bg-trick-string {
-    padding: $size-trick * 1rem;
-    margin: $size-trick * (-1rem);
-    background-size: $size-trick * 1rem * 2;
-  } @else {
-    background-size: $size;
-  }
-  background-repeat: $repeat;
-}
-
-@mixin text-font($size: 1rem, $color: #000, $weight: $regular-weight, $height: 1em, $spacing: 1px) {
-  font: {
-    size: $size;
-    weight: $weight;
-  }
-  line-height: $height;
-  letter-spacing: $spacing;
-  color: $color;
-}
-
-@mixin mq($width, $value-map) {
-  @media screen and (max-width: $width) {
-    @each $property, $value in $value-map {
-      #{$property}: $value;
-    }
-  }
-}
-
+// GENERAL
 * {
   margin: 0;
   padding: 0;
@@ -65,36 +15,187 @@ html {
 
 body {
   background-color: $main-background-color;
-  @include bg-image($background-source, left top, $body-bg-width $body-bg-height);
+  @include bg-image($background-source, left top, 200vw 50vh);
+  transition: background-size .3s cubic-bezier(0, 0.5, 0, 1);
   font-family: 'Manrope', sans-serif;
-  font-weight: 600;
-  transition: background-size .1s ease-out;
-}
-
-@for $i from 0 through 3 {
-  body {
-    @include mq($ugly-width - $i * 300px, (background-size: ($body-bg-width + $i * 50) ($body-bg-height - $i * 3)));
-  }
+  font-weight: $regular-weight;
+  color: $text-color;
 }
 
 .main-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+  @include flex($direction: column, $ai: center, $jc: center);
   height: 100vh;
+  text-align: center;
+  &__header {
+    min-height: calc(#{$header-height} + 100px);
+  }
 }
 
+%button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+// HEADER
 .header {
-  text-align: center;
-  @include bg-image($header-background-source, $position: center 75%, $size: $bg-trick-string, $size-trick: 6);
+  @include bg-image($header-background-source, $position: center center,
+                    $size: $header-height);
+  @include flex(column, $ai: center, $jc: center);
   &__head {
     margin: 0 {
       bottom: 15px;
     }
-    @include text-font(2rem, $weight: $bold-weight, $spacing: 0.5px);
+    @include text(2rem, $headers-text-color, $weight: $bold-weight, $spacing: -1px);
   }
   &__text {
-    @include text-font($introductory-paragraph-size, $text-color);
+    @include text($introductory-paragraph-size);
   }
 }
+
+// COMPONENT
+.component {
+  width: 90%;
+  max-width: 600px;
+  min-height: 400px;
+  background-color: $component-background-color;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px $component-shadow-color;
+  @include grid($tc: 1fr, $tr: 65% 35%, $ai: center);
+  &__pricing {
+    border-bottom: 2px $component-divider-color solid;
+    height: 100%;
+  }
+  &__confirmation {
+    height: 100%;
+  }
+}
+
+%range-track {
+  cursor: pointer;
+  width: 100%;
+  height: $slider-bar-height;
+  border-radius: capsule($height: $slider-bar-height);
+  background-color: $empty-slider-bar-color;
+}
+
+// PRICING
+.pricing {
+  @include grid($tc: 1fr 1fr, $tr: 40% 40% 20%, $ai: center);
+  padding: 25px 50px;
+  &__pageviews {
+    text-align: left;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    @include text($spacing: 2px, $transform: uppercase);
+  }
+  &__price {
+    text-align: right;
+    white-space: nowrap;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    @include flex($ai: center, $jc: flex-end);
+    &--bigger {
+      display: inline-block;
+      margin: 5px;
+      @include text($size: 2rem, $color: $headers-text-color,
+                    $spacing: 1px, $weight: $bold-weight);
+    }
+  }
+  &__slider {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+    label {
+      width: 100%;
+    }
+    input[type='range'] {
+      appearance: none;
+      @extend %range-track;
+      outline: none;
+      opacity: 0.75;
+      transition: opacity $interactive-transition;
+      &:hover {
+        opacity: 1;
+      }
+      // powered by postcss-input-range
+      &::range-thumb {
+        appearance: none;
+        cursor: pointer;
+        width: $slider-handle-size;
+        height: $slider-handle-size;
+        border-radius: capsule($height: $slider-handle-size);
+        background-color: $slider-background-color;
+        @include bg-image($slider-handle-image-source, $size: 60%)
+      }
+      // powered by postcss-input-range
+      &::range-track {
+        appearance: none;
+      }
+    }
+  }
+  &__billing {
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+  }
+}
+
+.billing {
+  text-align: right;
+  &__toggle {
+    margin: 0 10px;
+  }
+  &__discount::after {
+    content: $discount-content;
+    margin: 0 10px;
+    padding: $discount-top-and-bottom-padding 10px;
+    border-radius: capsule($discount-text-size, $discount-top-and-bottom-padding);
+    display: inline-block;
+    background-color: $discount-background-color;
+    @include text($discount-text-size, $discount-text-color);
+  }
+}
+
+// CONFIRMATION
+.confirmation {
+  @include flex($ai: center, $jc: space-between);
+  padding: 25px 50px;
+  &__button {
+    @extend %button;
+    width: 200px;
+    padding: $CTA-button-top-padding 25px;
+    background-color: $CTA-background-color;
+    color: $CTA-text-color;
+    border-radius: capsule(1rem, $CTA-button-top-padding);
+    transition: color $interactive-transition;
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+.services {
+  text-align: left;
+  &__text {
+    position: relative;
+    margin: 10px 0 10px (-$services_check_margin);
+  }
+  &__text::before {
+    display: inline-block;
+    position: absolute;
+    content: url($services_check_source);
+    left: $services_check_margin;
+    bottom: 2px;
+  }
+}
+
+
+// ATTRIBUTION
+.attribution {
+  // margin doesn't work at bottom
+  margin-top: 100px;
+  padding-bottom: 50px;
+}
+
+
+// importing media queries
+@import '@s/media';

@@ -10,7 +10,8 @@ const isDev = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV;
 
 const postcssPlugins = () => {
     const plugins = [
-        ['autoprefixer']
+        ['autoprefixer'],
+        ['postcss-input-range'],
     ];
     if (!isDev) {
         plugins.push(['cssnano']);

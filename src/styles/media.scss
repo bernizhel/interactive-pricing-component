@@ -1,0 +1,56 @@
+@import './vars';
+
+
+// MOBILE
+@media only screen and (max-width: $mobile-width) {
+  // GENERAL
+  body {
+    background-size: 500vw 45vh;
+  }
+
+  // HEADER
+  .header {
+    &__head {
+      font-size: 1.5rem;
+    }
+    &__text {
+      margin: 0 auto;
+      width: 60%;
+      line-height: 1.5rem;
+      font-size: 1rem;
+    }
+  }
+
+  // COMPONENT
+  .component {
+    min-height: 500px;
+    grid-template-rows: 55% 45%;
+  }
+
+  // PRICING
+  .pricing {
+    grid-template-rows: 10% repeat(3, 30%);
+    &__pageviews {
+      grid-column: 1 / 3;
+      grid-row: 1 / 2;
+    }
+    &__price {
+      grid-column: 1 / 3;
+      grid-row: 3 / 4;
+    }
+    &__slider {
+      grid-column: 1 / 3;
+      grid-row: 2 / 3;
+    }
+    &__billing {
+      grid-column: 1 / 3;
+      grid-row: 4 / 5;
+    }
+  }
+
+  .billing {
+    &__discount::after {
+      content: $discount-content-mobile;
+    }
+  }
+}

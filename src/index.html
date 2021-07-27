@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- importing Manrope font family-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&display=swap" rel="stylesheet">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Interactive pricing component</title>
@@ -20,20 +21,24 @@
             <main class="main-container__component component">
 
                 <div class="component__pricing pricing">
-                    <p class="pricing__pageviews">Pageviews</p>
-                    <div></div>
-                    <p class="pricing__price"><span class="pricing__price--bigger">$</span>/ month</p>
-                    <div class="pricing__billing">
-                        Monthly Billing <button></button>
-                        Yearly Billing <span class="billing__discount">25% discount</span>
+                    <p class="pricing__pageviews">100k Pageviews</p>
+                    <p class="pricing__price"><span class="pricing__price--bigger">$16.00</span>/ month</p>
+                    <div class="pricing__slider">
+                        <label for="pricing-slider">
+                            <input type="range" min="1" max="100" value="20" id="pricing-slider">
+                        </label>
+                    </div>
+                    <div class="pricing__billing billing">
+                        Monthly Billing <button class="billing__toggle">sad</button>
+                        <span class="billing__discount">Yearly Billing</span>
                     </div>
                 </div>
 
                 <div class="component__confirmation confirmation">
-                    <div class="confirmation__proposals proposals">
-                        <p class="proposals__text">Unlimited websites</p>
-                        <p class="proposals__text">100% data ownership</p>
-                        <p class="proposals__text">Email reports</p>
+                    <div class="confirmation__services services">
+                        <p class="services__text">Unlimited websites</p>
+                        <p class="services__text">100% data ownership</p>
+                        <p class="services__text">Email reports</p>
                     </div>
                     <button class="confirmation__button">Start my trial</button>
                 </div>
