@@ -16,13 +16,14 @@ $introductory-paragraph-size: 15px;
 
 // INTERACTIVE OBJECTS
 $interactive-transition: .2s ease-out;
-// slider
-$full-slider-bar-color: hsl(174, 77%, 80%);
-$empty-slider-bar-color: hsl(224, 65%, 95%);
-$slider-background-color: hsl(174, 86%, 45%);
-$slider-bar-height: 10px;
-$slider-handle-size: 40px;
-$slider-handle-image-source: '@i/icon-slider.svg';
+// range
+$full-range-bar-color: hsl(174, 77%, 80%);
+$empty-range-bar-color: hsl(224, 65%, 95%);
+$range-background-color: hsl(174, 86%, 45%);
+$range-bar-height: 10px;
+$range-progress-initial-width: 70%;
+$range-thumb-size: 40px;
+$range-thumb-image-source: '@i/icon-slider.svg';
 // toggle button
 $toggle-background-color: hsl(223, 50%, 87%);
 

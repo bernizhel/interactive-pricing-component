@@ -23,6 +23,14 @@
   color: $color;
 }
 
+// input range and button mixin
+@mixin click-input {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
 // support function to convert number from rem units to pixels, implying that 1rem = 16px
 @function rem-to-px($number) {
   @return math.div($number, $number * 0 + 1) * $rem-in-pixels;

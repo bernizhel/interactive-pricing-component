@@ -53,6 +53,7 @@ module.exports = {
         alias: {
             '@s': path.resolve(__dirname, 'src/styles'),
             '@i': path.resolve(__dirname, 'src/images'),
+            '@js': path.resolve(__dirname, 'src/scripts'),
             '@': path.resolve(__dirname, 'src'),
         },
     },

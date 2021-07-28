@@ -1,3 +1,4 @@
+@use 'sass:math';
 @import '~normalize.css';
 @import '@s/vars';
 @import '@s/mixins';
@@ -23,18 +24,12 @@ body {
 }
 
 .main-container {
-  @include flex($direction: column, $ai: center, $jc: center);
+  @include flex($direction: column, $ai: center);
   height: 100vh;
   text-align: center;
   &__header {
     min-height: calc(#{$header-height} + 100px);
   }
-}
-
-%button {
-  border: none;
-  outline: none;
-  cursor: pointer;
 }
 
 // HEADER
@@ -71,14 +66,6 @@ body {
   }
 }
 
-%range-track {
-  cursor: pointer;
-  width: 100%;
-  height: $slider-bar-height;
-  border-radius: capsule($height: $slider-bar-height);
-  background-color: $empty-slider-bar-color;
-}
-
 // PRICING
 .pricing {
   @include grid($tc: 1fr 1fr, $tr: 40% 40% 20%, $ai: center);
@@ -102,34 +89,71 @@ body {
                     $spacing: 1px, $weight: $bold-weight);
     }
   }
-  &__slider {
+  &__range {
     grid-column: 1 / 3;
     grid-row: 2 / 3;
-    label {
-      width: 100%;
+    // I use another block to display progress
+    // (FF displays z-index differently than Chrome does,
+    // so I had to make this block as a sibling of the range's container)
+    &--progress-bar {
+      width: $range-progress-initial-width;
+      height: $range-bar-height;
+      border-radius: capsule($height: $range-bar-height);
+      background-color: $full-range-bar-color;
+      // I've got these 15px experimentally, so I don't know where they come from
+      transform: translateY(math.max($range-bar-height, 15px));
+      position: relative;
+      z-index: 0;
+      pointer-events: none;
     }
     input[type='range'] {
       appearance: none;
-      @extend %range-track;
-      outline: none;
-      opacity: 0.75;
-      transition: opacity $interactive-transition;
-      &:hover {
-        opacity: 1;
-      }
-      // powered by postcss-input-range
+      @include click-input;
+      width: 100%;
+      // ::range-thumb pseudo-class is powered by postcss-input-range
       &::range-thumb {
         appearance: none;
-        cursor: pointer;
-        width: $slider-handle-size;
-        height: $slider-handle-size;
-        border-radius: capsule($height: $slider-handle-size);
-        background-color: $slider-background-color;
-        @include bg-image($slider-handle-image-source, $size: 60%)
+        @include click-input;
+        width: $range-thumb-size;
+        height: $range-thumb-size;
+        margin-top: math.div(-$range-thumb-size, 2) + math.div($range-bar-height, 2);
+        border-radius: capsule($height: $range-thumb-size);
+        background-color: $range-background-color;
+        box-shadow: 0 10px math.div($range-thumb-size, 2)
+                    lighten($range-background-color, 15%);
+        @include bg-image($range-thumb-image-source, $size: 60%);
+        opacity: 0.75;
+        transition: opacity $interactive-transition;
+        position: relative;
+        z-index: 2;
+        &:hover {
+          opacity: 1;
+        }
       }
-      // powered by postcss-input-range
+      // there is a bug where if you grab the range too close to one's ends
+      // the cursor will behave chaotically, so specifying grabbing cursor
+      // on both range itself and its thumb helped to fix this problem in FF
+      &.grabbed::range-thumb {
+        cursor: grabbing;
+      }
+      &.grabbed {
+        cursor: grabbing;
+      }
+      // ::range-track pseudo-class is powered by postcss-input-range
       &::range-track {
         appearance: none;
+        @include click-input;
+        width: 100%;
+        height: $range-bar-height;
+        background-color: $empty-range-bar-color;
+        border-radius: capsule($height: $range-bar-height);
+      }
+      // ::range-lower pseudo-class is powered by postcss-input-range
+      // but it's only supported by FF, Edge and IE 10+
+      &::range-lower {
+        height: $range-bar-height;
+        border-radius: capsule($height: $range-bar-height);
+        background-color: $full-range-bar-color;
       }
     }
   }
@@ -160,7 +184,7 @@ body {
   @include flex($ai: center, $jc: space-between);
   padding: 25px 50px;
   &__button {
-    @extend %button;
+    @include click-input;
     width: 200px;
     padding: $CTA-button-top-padding 25px;
     background-color: $CTA-background-color;
