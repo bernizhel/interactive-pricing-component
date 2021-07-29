@@ -1,8 +1,10 @@
 /node_modules/
 /.idea/
 /interactive-pricing-component-main/
-/public/
 /.github/
 .firebaserc
 firebase.json
 /.firebase/
+package-lock.json
+/bernizhel.github.io/
+/public/
