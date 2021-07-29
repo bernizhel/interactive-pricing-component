@@ -69,7 +69,7 @@ body {
 // PRICING
 .pricing {
   @include grid($tc: 1fr 1fr, $tr: 40% 40% 20%, $ai: center);
-  padding: 25px 50px;
+  padding: $inner-blocks-padding;
   &__pageviews {
     text-align: left;
     grid-column: 1 / 2;
@@ -85,7 +85,7 @@ body {
     &--bigger {
       display: inline-block;
       margin: 5px;
-      @include text($size: 2rem, $color: $headers-text-color,
+      @include text($size: 2.2rem, $color: $headers-text-color,
                     $spacing: 1px, $weight: $bold-weight);
     }
   }
@@ -208,7 +208,7 @@ body {
 // CONFIRMATION
 .confirmation {
   @include flex($ai: center, $jc: space-between);
-  padding: 25px 50px;
+  padding: $inner-blocks-padding;
   &__button {
     @include click-input;
     width: 200px;
@@ -224,13 +224,13 @@ body {
 }
 
 .services {
-  text-align: left;
+  @include flex($direction: column);
   &__text {
     position: relative;
-    margin: 10px 0 10px (-$services_check_margin);
+    margin: 7px 0 7px (-$services_check_margin);
   }
   &__text::before {
-    display: inline-block;
+    display: block;
     position: absolute;
     content: url($services_check_source);
     left: $services_check_margin;

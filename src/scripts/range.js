@@ -2,6 +2,7 @@ const range = document.querySelector('#pricing-range');
 
 // to adjust the range bar on load
 document.addEventListener('DOMContentLoaded', styleBar);
+
 range.addEventListener('mousedown', styleThumb);
 range.addEventListener('input', styleBar);
 range.addEventListener('mouseup', unstyleThumb);

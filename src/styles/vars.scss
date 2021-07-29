@@ -5,7 +5,8 @@ $bold-weight: 800;
 $regular-weight: 600;
 $text-color: hsl(225, 20%, 60%);
 $ugly-width: 1440px;
-$mobile-width: 500px;
+$mobile-width: 560px;
+$tiny-width: 360px;
 // implying that 1rem = 16px to convert rem to pixels
 $rem-in-pixels: 16px;
 
@@ -30,6 +31,8 @@ $toggle-button-slider-size-difference: 8px;
 
 // COMPONENT
 // component general
+$inner-blocks-padding: 25px 50px;
+$inner-blocks-padding-mobile: 5px 20px;
 $component-background-color: #fff;
 $component-shadow-color: #ccc7;
 $component-divider-color: #eee;
@@ -38,7 +41,7 @@ $headers-text-color: hsl(227, 35%, 25%);
 $discount-background-color: hsl(14, 92%, 95%);
 $discount-text-color: hsl(15, 100%, 70%);
 $discount-content: '25% discount';
-$discount-content-mobile: '25%';
+$discount-content-mobile: '-25%';
 $discount-top-and-bottom-padding: 5px;
 $discount-text-size: 0.75rem;
 // services

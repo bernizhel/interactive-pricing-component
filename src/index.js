@@ -6,5 +6,5 @@ import '@js/range';
 
 // some issues between firefox and other browsers while displaying input[type="range"]
 if (navigator.userAgent.match(/firefox/i)) {
-    import('@s/ff-range.scss');
+    import('@s/firefox.scss');
 }
