@@ -1,6 +1,8 @@
+// styles
 import '@s/main.scss';
-import '@js/range';
+// scripts
 import '@js/toggle';
+import '@js/range';
 
 // some issues between firefox and other browsers while displaying input[type="range"]
 if (navigator.userAgent.match(/firefox/i)) {

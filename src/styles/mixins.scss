@@ -1,5 +1,5 @@
 @use 'sass:math';
-@import './vars';
+@use '@s/vars';
 
 
 // inserting background image
@@ -11,7 +11,7 @@
 }
 
 // text adjustment
-@mixin text($size: 1rem, $color: $text-color, $weight: $regular-weight,
+@mixin text($size: 1rem, $color: vars.$text-color, $weight: vars.$regular-weight,
             $height: 100%, $spacing: 0px, $transform: none) {
   font: {
     size: $size;
@@ -25,6 +25,7 @@
 
 // input range and button mixin
 @mixin click-input {
+  appearance: none;
   cursor: pointer;
   border: none;
   outline: none;
@@ -33,7 +34,7 @@
 
 // support function to convert number from rem units to pixels, implying that 1rem = 16px
 @function rem-to-px($number) {
-  @return math.div($number, $number * 0 + 1) * $rem-in-pixels;
+  @return math.div($number, $number * 0 + 1) * vars.$rem-in-pixels;
 }
 
 // making a block with proper border-radius to make its form to be capsule/stadium
@@ -52,8 +53,8 @@
 
 // flex settings
 @mixin flex($direction: row, $wrap: nowrap,  $ai: flex-start,
-            $ac: flex-start, $jc: flex-start) {
-  display: flex;
+            $ac: flex-start, $jc: flex-start, $type: flex) {
+  display: $type;
   flex-wrap: $wrap;
   flex-direction: $direction;
   align-items: $ai;

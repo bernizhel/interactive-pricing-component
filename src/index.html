@@ -26,11 +26,13 @@
                     <div class="pricing__range">
                         <div class="pricing__range--progress-bar"></div>
                         <label for="pricing-range">
-                            <input type="range" min="1" max="100" value="50" step="1" id="pricing-range">
+                            <!-- range from 1 to 200 to make it smooth-->
+                            <input type="range" min="1" max="200" value="100" step="1" id="pricing-range">
                         </label>
                     </div>
                     <div class="pricing__billing billing">
-                        Monthly Billing <button class="billing__toggle">sad</button>
+                        Monthly Billing
+                        <input type="checkbox" class="billing__toggle">
                         <span class="billing__discount">Yearly Billing</span>
                     </div>
                 </div>
@@ -41,7 +43,7 @@
                         <p class="services__text">100% data ownership</p>
                         <p class="services__text">Email reports</p>
                     </div>
-                    <button class="confirmation__button">Start my trial</button>
+                    <input type="submit" class="confirmation__button" value="Start my trial">
                 </div>
 
             </main>

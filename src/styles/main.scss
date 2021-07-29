@@ -92,11 +92,12 @@ body {
   &__range {
     grid-column: 1 / 3;
     grid-row: 2 / 3;
+    align-self: start;
     // I use another block to display progress
     // (FF displays z-index differently than Chrome does,
     // so I had to make this block as a sibling of the range's container)
     &--progress-bar {
-      width: $range-progress-initial-width;
+      width: 0%;
       height: $range-bar-height;
       border-radius: capsule($height: $range-bar-height);
       background-color: $full-range-bar-color;
@@ -104,30 +105,28 @@ body {
       transform: translateY(math.max($range-bar-height, 15px));
       position: relative;
       z-index: 0;
+      // to make underlying range input accessible by mouse events
       pointer-events: none;
     }
     input[type='range'] {
-      appearance: none;
       @include click-input;
       width: 100%;
       // ::range-thumb pseudo-class is powered by postcss-input-range
       &::range-thumb {
-        appearance: none;
         @include click-input;
         width: $range-thumb-size;
         height: $range-thumb-size;
         margin-top: math.div(-$range-thumb-size, 2) + math.div($range-bar-height, 2);
         border-radius: capsule($height: $range-thumb-size);
-        background-color: $range-background-color;
-        box-shadow: 0 10px math.div($range-thumb-size, 2)
-                    lighten($range-background-color, 15%);
+        background-color: saturate($range-background-color, 10%);
+        box-shadow: 0 10px math.div($range-thumb-size, 1.5)
+                    lighten($range-background-color, 25%);
         @include bg-image($range-thumb-image-source, $size: 60%);
-        opacity: 0.75;
-        transition: opacity $interactive-transition;
+        transition: background-color $interactive-transition;
         position: relative;
         z-index: 2;
         &:hover {
-          opacity: 1;
+          background-color: $range-background-color;
         }
       }
       // there is a bug where if you grab the range too close to one's ends
@@ -141,7 +140,6 @@ body {
       }
       // ::range-track pseudo-class is powered by postcss-input-range
       &::range-track {
-        appearance: none;
         @include click-input;
         width: 100%;
         height: $range-bar-height;
@@ -150,6 +148,7 @@ body {
       }
       // ::range-lower pseudo-class is powered by postcss-input-range
       // but it's only supported by FF, Edge and IE 10+
+      // so I use JS instead, but I left this lines for backup
       &::range-lower {
         height: $range-bar-height;
         border-radius: capsule($height: $range-bar-height);
@@ -166,7 +165,34 @@ body {
 .billing {
   text-align: right;
   &__toggle {
+    @include click-input;
+    height: $toggle-button-height;
+    width: $toggle-button-height * 2;
+    display: inline-block;
+    vertical-align: middle;
     margin: 0 10px;
+    border-radius: capsule($height: $toggle-button-height);
+    background-color: $toggle-background-color;
+    position: relative;
+    transition: background-color $interactive-transition;
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      height: $toggle-button-height - $toggle-button-slider-size-difference;
+      width: $toggle-button-height - $toggle-button-slider-size-difference;
+      border-radius: capsule($height: $toggle-button-height);
+      top: math.div($toggle-button-slider-size-difference, 2);
+      left: math.div($toggle-button-slider-size-difference, 2);
+      background-color: $main-background-color;
+      transition: transform $interactive-transition;
+    }
+    &:hover {
+      background-color: darken($full-range-bar-color, 10%);
+    }
+    &:checked::before {
+      transform: translateX($toggle-button-height);
+    }
   }
   &__discount::after {
     content: $discount-content;
