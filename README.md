@@ -11,7 +11,6 @@ This is a solution to the [Interactive pricing component challenge on Frontend M
 - [My process](#my-process)
     - [Built with](#built-with)
     - [What I learned](#what-i-learned)
-    - [Useful resources](#useful-resources)
 - [Author](#author)
 
 ## Overview
@@ -26,12 +25,11 @@ Users should be able to:
 
 ### Screenshot
 
-![Not done yet](./screenshot.jpg)
+![](./screenshot.png)
 
 ### Links
 
-- Solution URL: [Add solution URL here]()
-- Live Site URL: [Add live site URL here]()
+- [Live Site](https://interactive-pricing-component.firebaseapp.com/)
 
 ## My process
 
@@ -46,10 +44,10 @@ Users should be able to:
 
 ### What I learned
 
-1. _SASS_ preprocessor more closely.
-2. How to style `input` tag of range type.
-
-### Useful resources
+1. How to style `input[type="range"]` and `input[type="checkbox"]` tags.
+2. The stacking context.
+3. How to change text depending on range's value.
+4. How to prevent sticky hover state on mobile devices.
 
 ## Author
 

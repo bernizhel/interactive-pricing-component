@@ -1,8 +1,8 @@
-@import './vars';
+@use '@s/vars' as v;
 
 
 // MOBILE
-@media only screen and (max-width: $mobile-width) {
+@media only screen and (max-width: v.$mobile-width) {
   // GENERAL
   body {
     background-size: 500vw 45vh;
@@ -29,7 +29,7 @@
   .pricing {
     grid-template-rows: 25% 15% 35% 25%;
     grid-template-columns: 1fr;
-    padding: $inner-blocks-padding-mobile;
+    padding: v.$inner-blocks-padding-mobile;
     &__pageviews {
       grid-column: 1 / 3;
       grid-row: 1 / 2;
@@ -61,8 +61,8 @@
       margin: 0 7px;
     }
     &__discount::after {
-      content: $discount-content-mobile;
-      padding: $discount-top-and-bottom-padding 7px;
+      content: v.$discount-content-mobile;
+      padding: v.$discount-top-and-bottom-padding 7px;
       margin: 0 7px;
     }
   }
@@ -70,7 +70,7 @@
   .confirmation {
     flex-direction: column;
     justify-content: space-around;
-    padding: $inner-blocks-padding-mobile;
+    padding: v.$inner-blocks-padding-mobile;
     &__button {
       font-size: 0.9rem;
     }
@@ -81,9 +81,28 @@
 }
 
 // SMALLER SCREENS
-@media only screen and (max-width: $tiny-width) {
+@media only screen and (max-width: v.$tiny-width) {
   .billing {
     white-space: normal;
     line-height: 2rem;
+  }
+}
+
+// to prevent problem where clicking on button with touchpad leaves hover state
+@media (hover: hover) {
+  .billing__toggle:hover {
+    background-color: v.$full-range-bar-color;
+  }
+  .confirmation__button:hover {
+    color: v.$CTA-text-color-hovered;
+  }
+}
+
+@media (hover: none), (hover: on-demand) {
+  .billing__toggle:hover {
+    background-color: v.$toggle-background-color;
+  }
+  .confirmation__button:hover {
+    color: v.$CTA-text-color;
   }
 }

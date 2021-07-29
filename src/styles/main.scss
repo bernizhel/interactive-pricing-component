@@ -188,7 +188,7 @@ body {
       transition: transform $interactive-transition;
     }
     &:hover {
-      background-color: darken($full-range-bar-color, 10%);
+      background-color: $full-range-bar-color;
     }
     &:checked::before {
       transform: translateX($toggle-button-height);
@@ -218,7 +218,7 @@ body {
     border-radius: capsule(1rem, $CTA-button-top-padding);
     transition: color $interactive-transition;
     &:hover {
-      color: #fff;
+      color: $CTA-text-color-hovered;
     }
   }
 }
@@ -244,6 +244,11 @@ body {
   // margin doesn't work at bottom
   margin-top: 100px;
   padding-bottom: 50px;
+  a {
+    text-decoration: none;
+    cursor: pointer;
+    color: blueviolet;
+  }
 }
 
 
