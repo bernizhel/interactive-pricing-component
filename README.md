@@ -29,7 +29,7 @@ Users should be able to:
 
 ### Links
 
-- [Live Site](https://interactive-pricing-component.firebaseapp.com/)
+- [Live Site](https://bernizhel.github.io/)
 
 ## My process
 
