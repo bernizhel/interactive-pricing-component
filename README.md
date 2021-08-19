@@ -29,7 +29,7 @@ Users should be able to:
 
 ### Links
 
-- [Live Site](https://bernizhel.github.io/)
+- [Live Site](https://vigorous-aryabhata-44163d.netlify.app/)
 
 ## My process
 
