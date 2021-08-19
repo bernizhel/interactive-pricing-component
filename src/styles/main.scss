@@ -61,9 +61,6 @@ body {
     border-bottom: 2px $component-divider-color solid;
     height: 100%;
   }
-  &__confirmation {
-    height: 100%;
-  }
 }
 
 // PRICING
@@ -237,20 +234,6 @@ body {
     bottom: 2px;
   }
 }
-
-
-// ATTRIBUTION
-.attribution {
-  // margin doesn't work at bottom
-  margin-top: 100px;
-  padding-bottom: 50px;
-  a {
-    text-decoration: none;
-    cursor: pointer;
-    color: blueviolet;
-  }
-}
-
 
 // importing media queries
 @import '@s/media';
